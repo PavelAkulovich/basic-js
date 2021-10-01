@@ -15,19 +15,38 @@ import { NotImplementedError } from '../extensions/index.js';
  */
 export default function transform(arr) {
   if (!Array.isArray(arr))
-   throw new Error(`'arr' parameter must be an instance of the Array!`)
+    throw new Error(`'arr' parameter must be an instance of the Array!`)
   let result = []
   for (let i = 0; i< arr.length; i++) {
-    if (arr[i] === `--discard-next`) i+=2
+    if (arr[i] === `--discard-next`){ 
+    if (i === arr.length-1) {
+       
+     return result
+    }
+    
+    else
+    i+=2}
   if (arr[i] === `--discard-prev`){
     result.pop() 
       i+=1
   } 
   if (arr[i] === `--double-next`) {
+     if (i === arr.length-1) {
+       
+     return result
+    }
+    
+    else
     result.push(arr[i+1])
     i+=1
   }
   if (arr[i] === `--double-prev`) {
+    if (i === 0) {
+      result.push(arr[i+1])
+      i+=1
+    }
+    
+    else
     result.push(arr[i-1])
     i+=1
   }  
